@@ -27,3 +27,34 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Arquivos de IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Diretórios de compilação
+/out/
+/target/
+/bin/
+
+# Arquivos de compilação Java
+*.class
+
+# Outros arquivos de build
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Arquivos de log
+*.log
+
+# Arquivos de configuração sensíveis (ex: chaves de API, senhas)
+# NUNCA salve chaves de API ou senhas no Git!
+# Se você tiver um arquivo para isso, coloque-o aqui.
+# Exemplo:
+# config.properties
+# *.env
