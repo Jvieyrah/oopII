@@ -1,34 +1,54 @@
-import exemplo.imposto.ICMS;
-import exemplo.imposto.IOF;
-import exemplo.imposto.Imposto;
-import exemplo.imposto.ImpostoRecord;
+import exemplo.conversor.Conversor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        Object variavel = "AAAA";
 
-        //Perecivel produto = new Produto();
-        //processar(produto);
+        //convertForInteger(variavel);
+        //convertForBoolean(variavel);
 
-        //ICMS, IOF
+        Conversor<Boolean> booleanConversor = new Conversor<>(true);
+        //booleanConversor.convertGeneric();
 
-        Imposto IOF = new IOF(1.5D);
-        Imposto ICMS = new ICMS(2.7D);
+        Conversor<Integer> integerConversor = new Conversor<>(100);
+        //integerConversor.convertGeneric();
 
-        //new IVA(27D);
+        List<Integer> numerosInteiros = List.of(1,2,3,4,5);
+        List<Number> numeros = List.of(1,2,3,4,5);
 
-        //calcular(IOF);
-        calcular(ICMS);
-        //calcular(IVA);
+        integerConversor.imprimeListaWildCardGenerico(numeros);
+        integerConversor.imprimeListaWildCardGenerico(numerosInteiros);
 
-        ImpostoRecord iva = new ImpostoRecord("2", "IVA");
-        //iva.taxa();
+        integerConversor.imprimeListaWildCardSuper(numeros);
+        //integerConversor.imprimeListaWildCardSuper(numerosInteiros); NAO ACEITA O PARAMENTRO
+
+        integerConversor.imprimeListaWildCardExtends(numerosInteiros);
+        integerConversor.imprimeListaWildCardExtends(numeros);
+
+
+//        E - Element (usado exclusivamente pelo Java Collections Framework)
+//        K - Key
+//        N - Number
+//        T - Type
+//        V - Value
+//        S,U,V etc. - 2nd, 3rd, 4th types
 
 
     }
 
-    public static void calcular(Imposto imposto) {
-        imposto.imprimir();
+
+
+     public static void convertForInteger(Object param) {
+         Integer num = (Integer) param;
+         System.out.printf("Parametro eh %d", num);
+     }
+
+    public static void convertForBoolean(Object param) {
+        Boolean num = (Boolean) param;
+        System.out.printf("Parametro eh %b", num);
     }
+
 }
