@@ -1,52 +1,60 @@
-# 📘 Lista de Exercícios Desafios – Interfaces em Java
+# Exercícios sobre SRP (Single Responsibility Principle) e OCP (Open Closed Principle)
 
-Este material contém apenas os **enunciados dos exercícios** para prática.  
+## Exercício 1 - SRP Básico
 
----
+Crie uma classe `Relatorio` que atualmente possui métodos para: - Gerar
+dados de relatório - Exportar em PDF - Enviar por e-mail
 
-### **1. Criando uma Interface Simples**
-Crie uma interface `Animal` com os métodos `emitirSom()` e `mover()`.  
-Depois, implemente-a nas classes `Cachorro` e `Gato`.  
-No programa principal, crie objetos das duas classes e invoque seus métodos.  
+**Tarefa:** Refatore a classe para que siga o princípio da
+responsabilidade única (SRP).
 
----
+------------------------------------------------------------------------
 
-### **2. Interface com Constantes**
-Crie uma interface `OperacoesMatematicas` que define constantes para `PI` e `E`,  
-além dos métodos `somar`, `subtrair`, `multiplicar` e `dividir`.  
-Implemente essa interface na classe `Calculadora`.  
+## Exercício 2 - SRP em um Sistema de Biblioteca
 
----
+Uma classe `Livro` contém informações do livro, regras de validação e
+regras de persistência no banco de dados.
 
-### **3. Interface com `default` e `static`**
-Crie uma interface `Pagamento` com o método `processarPagamento(double valor)`.  
-- Adicione um método `default gerarRecibo(double valor)` que imprime um recibo.  
-- Adicione um método `static validarValor(double valor)` que verifica se o valor é positivo.  
-Implemente em `CartaoCredito` e `Pix`.  
+**Tarefa:** Separe as responsabilidades em classes distintas aplicando
+SRP.
 
----
+------------------------------------------------------------------------
 
-### **4. Polimorfismo com Interfaces**
-Implemente um sistema de gerenciamento de arquivos com uma interface `Armazenamento` que define os métodos `salvar(String dado)` e `ler()`.  
-Crie implementações para:  
-- `BancoDeDados` (simula armazenamento em BD)  
-- `ArquivoTexto` (simula gravação em arquivo de texto)  
+## Exercício 3 - OCP Básico
 
-No programa principal, crie uma lista de `Armazenamento` e demonstre polimorfismo.  
+Implemente uma classe `CalculadoraDesconto` que calcula descontos para
+diferentes tipos de clientes (padrão, VIP, estudante).
 
----
+**Tarefa:** Refatore a implementação para seguir o princípio
+aberto/fechado (OCP), permitindo adicionar novos tipos de clientes sem
+modificar código existente.
 
-### **5. Sistema de Notificações**
-Desenvolva um sistema de notificações com os seguintes requisitos:  
-1. Crie uma interface `Notificacao` com o método `enviar(String mensagem)`.  
-2. Implemente pelo menos três classes que representem canais de notificação:  
-   - `EmailNotificacao`  
-   - `SmsNotificacao`  
-   - `PushNotificacao`  
-3. Crie uma classe `GerenciadorDeNotificacoes` que receba uma lista de notificadores (injeção de dependência) e tenha um método `notificarTodos(String mensagem)`.  
-4. No programa principal (`main`), permita que o usuário escolha quais canais de notificação deseja utilizar.  
-5. O sistema deve permitir expansão futura (exemplo: adicionar `WhatsAppNotificacao` sem modificar o código existente).  
+------------------------------------------------------------------------
 
----
+## Exercício 4 - OCP em Relatórios
 
-✍️ Resolva os desafios implementando as classes e interfaces solicitadas.  
+Um sistema gera relatórios em `PDF` e `CSV`. Atualmente, a lógica de
+exportação está toda em um único método com vários `if/else`.
+
+**Tarefa:** Refatore o código para aplicar OCP, permitindo adicionar
+novos formatos sem alterar a classe principal.
+
+------------------------------------------------------------------------
+
+## Exercício 5 - Desafio Final
+
+Você foi contratado para desenvolver um **sistema de pedidos online**.\
+O sistema deve permitir: - Cálculo do valor total do pedido - Diferentes
+estratégias de desconto (ex: desconto percentual, desconto fixo, cupom
+promocional) - Diferentes métodos de pagamento (ex: cartão, PIX, PayPal)
+
+### Requisitos:
+
+1.  Aplique **SRP** para garantir que cada classe tenha uma única
+    responsabilidade.
+2.  Aplique **OCP** para que seja fácil adicionar novos descontos e
+    métodos de pagamento sem modificar o código existente.
+
+**Entrega esperada:**\
+- Diagrama de classes UML mostrando a separação de responsabilidades.\
+- Implementação em Java seguindo os princípios **SRP** e **OCP**.
