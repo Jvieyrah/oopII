@@ -1,54 +1,31 @@
-import exemplo.ecommerce.Produto;
-import exemplo.imposto.ICMS;
-import exemplo.imposto.IOF;
-import exemplo.imposto.Imposto;
-import exemplo.imposto.ImpostoRecord;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        Pedido pedido = new Pedido();
+        pedido.adicionarItem(new Item("Notebook", 3500.00, 1));
+        pedido.adicionarItem(new Item("Mouse Gamer", 150.00, 2));
 
-        //Perecivel produto = new Produto();
-        //processar(produto);
+        // Aplica um desconto de 10%
+        pedido.aplicarDesconto(new DescontoPercentual(10.0));
+        System.out.println("Valor total com desconto: R$" + pedido.getValorTotal());
+        System.out.println("Valor do desconto: R$" + pedido.getValorDesconto());
 
-        //ICMS, IOF
+        // Processa o pagamento com PIX
+        pedido.processarPagamento(new PagamentoPIX("minhachave@email.com"));
 
-        Imposto IOF = new IOF(1.5D);
-        Imposto ICMS = new ICMS(2.7D);
+        System.out.println("-------------------------");
 
-        //new IVA(27D);
+        // Novo pedido com outro tipo de desconto e pagamento
+        Pedido segundoPedido = new Pedido();
+        segundoPedido.adicionarItem(new Item("Teclado Mecânico", 500.00, 1));
+        segundoPedido.adicionarItem(new Item("Headset", 300.00, 1));
 
-        //calcular(IOF);
-        calcular(ICMS);
-        //calcular(IVA);
+        // Aplica um desconto fixo de R$ 50,00
+        segundoPedido.aplicarDesconto(new DescontoFixo(50.00));
+        System.out.println("Valor total com desconto: R$" + segundoPedido.getValorTotal());
+        System.out.println("Valor do desconto: R$" + segundoPedido.getValorDesconto());
 
-        ImpostoRecord iva = new ImpostoRecord("2", "IVA");
-        //iva.taxa();
-
-        Comparator<Produto> compImposto = Comparator.comparing(Produto::getId)
-                                                    .thenComparing(Produto::getValor);
-        //compImposto.compare(new Produto(), new Produto());
-
-        Integer numero = Integer.valueOf(10);
-        System.out.printf("O numeros sao iguais %d", numero.compareTo(Integer.valueOf(15)));
-
-
-
-
-
-        List<Produto> produtos = new ArrayList<>();
-        produtos.add(new Produto(2,  "TV 55", new BigDecimal(4500)));
-        produtos.add(new Produto(1,  "PS 5", new BigDecimal(3800)));
-        Collections.sort(produtos);
-        Collections.sort(produtos, Comparator.comparing(Produto::getValor));
-        produtos.sort((p1, p2) -> p1.getId().compareTo(p2.getId()));
-
-
-    }
-
-    public static void calcular(Imposto imposto) {
-        imposto.imprimir();
+        // Processa o pagamento com Cartão
+        segundoPedido.processarPagamento(new PagamentoCartao("1234567890123456"));
     }
 }

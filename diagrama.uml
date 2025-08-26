@@ -1,0 +1,67 @@
+classDiagram
+    class Pedido {
+        -List<Item> itens
+        -double valorTotal
+        +adicionarItem(Item item)
+        +getValorTotal()
+        +aplicarDesconto(EstrategiaDesconto desconto)
+        +processarPagamento(MetodoPagamento pagamento)
+    }
+
+    class Item {
+        -String nome
+        -double preco
+        -int quantidade
+        +getPrecoTotal()
+    }
+
+    interface EstrategiaDesconto {
+        <<interface>>
+        +calcularDesconto(double valor)
+    }
+
+    class DescontoPercentual {
+        -double percentual
+        +calcularDesconto(double valor)
+    }
+
+    class DescontoFixo {
+        -double valorFixo
+        +calcularDesconto(double valor)
+    }
+
+    class CupomPromocional {
+        -String codigo
+        -double valorCupom
+        +calcularDesconto(double valor)
+    }
+
+    interface MetodoPagamento {
+        <<interface>>
+        +pagar(double valor)
+    }
+
+    class PagamentoCartao {
+        -String numeroCartao
+        +pagar(double valor)
+    }
+
+    class PagamentoPIX {
+        -String chavePIX
+        +pagar(double valor)
+    }
+
+    class PagamentoPayPal {
+        -String email
+        +pagar(double valor)
+    }
+
+    Pedido "1" -- "0..*" Item : contém
+    Pedido "1" -- "1" EstrategiaDesconto : usa
+    Pedido "1" -- "1" MetodoPagamento : usa
+    EstrategiaDesconto <|.. DescontoPercentual : implementa
+    EstrategiaDesconto <|.. DescontoFixo : implementa
+    EstrategiaDesconto <|.. CupomPromocional : implementa
+    MetodoPagamento <|.. PagamentoCartao : implementa
+    MetodoPagamento <|.. PagamentoPIX : implementa
+    MetodoPagamento <|.. PagamentoPayPal : implementa
